@@ -28,7 +28,7 @@
 %%%           use of ex11_xauth:filename/0.
 %%%
 %%%---------------------------------------------------------------------
--vc('$Id: ex11_client.erl,v 1.1 2003/02/26 14:50:33 vladdu Exp $ ').
+-vc('$Id: ex11_client.erl,v 1.2 2003/02/26 15:25:01 vladdu Exp $ ').
 -export([start/1,req/2,synchronize/2,flush/1,lock_display/1,unlock_display/1,
 	 set_display/2,get_display/1,new_window/2,new_pixmap/2,new_gc/2]).
 %% Internal exports

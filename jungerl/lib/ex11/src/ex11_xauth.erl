@@ -27,7 +27,7 @@
 %%%           To make it work under Windows. Added filename/0.
 %%%
 %%%---------------------------------------------------------------------
--vc('$Id: ex11_xauth.erl,v 1.1 2003/02/26 14:50:34 vladdu Exp $ ').
+-vc('$Id: ex11_xauth.erl,v 1.2 2003/02/26 15:25:02 vladdu Exp $ ').
 -export([read/1,host2cookie/2,filename/0]).
 
 -import(ex11_utils,[first/2,i16/2,split_list/2]).

@@ -17,8 +17,8 @@
 %%%           Transformed again to use the Erlang X11 binding.
 %%%
 %%% --------------------------------------------------------------------
--vc('$Id: rcube.erl,v 1.1 2003/02/26 14:50:35 vladdu Exp $ ').
--export([start/1,init/1,kicker/2]).
+-vc('$Id: rcube.erl,v 1.2 2003/02/26 15:25:02 vladdu Exp $ ').
+-export([start/0, start/1,init/1,kicker/2]).
 
 -import(matrix44,[multiply14/2,mk_rotate_matrix/2,mk_hcord/3,
 		  mk_translate_matrix/3]).
@@ -34,6 +34,9 @@
 	       pix_w,       % The pixmap width
 	       pix_h        % Te pixmap height
 	      }).
+
+start() ->
+    start("localhost").
 
 start(Host) ->
     spawn(?MODULE,init,[Host]).
