@@ -9,7 +9,7 @@
 %%%    - implement more # macros
 %%%    - #\ is wrong
 %%%
-%%% $Id: lisp_parse_std.erl,v 1.1 2004/04/07 08:51:58 mikl Exp $
+%%% $Id: lisp_parse_std.erl,v 1.2 2004/04/13 18:17:06 vladdu Exp $
 %%%
 %%%-------------------------------------------------------------------
 

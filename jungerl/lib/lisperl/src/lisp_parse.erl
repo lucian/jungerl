@@ -13,7 +13,7 @@
 %%%      not the first. General handling, or in each macro reader?
 %%%    - use other sources than strings: binaries, files. 
 %%%
-%%% $Id: lisp_parse.erl,v 1.1 2004/04/07 08:51:58 mikl Exp $
+%%% $Id: lisp_parse.erl,v 1.2 2004/04/13 18:16:25 vladdu Exp $
 %%%
 %%%-------------------------------------------------------------------
 -module(lisp_parse).
