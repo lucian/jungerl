@@ -5,7 +5,7 @@
 %%% Purpose : iconv support
 %%% Created : 23 Mar 2004 by <tobbe@bluetail.com>
 %%%
-%%% $Id: iconv.erl,v 1.2 2004/03/26 00:17:17 etnt Exp $
+%%% $Id: iconv.erl,v 1.3 2004/05/13 11:32:39 etnt Exp $
 %%%----------------------------------------------------------------------
 -behaviour(gen_server).
 -export([start/0, start_link/0, open/2, conv/2, close/1]).
@@ -141,16 +141,17 @@ code_change(_, _, _) ->
 %%%----------------------------------------------------------------------
 
 load_path(File) ->
-    case lists:filter(fun(D) ->
-                              case file:read_file_info(D ++ "/" ++ File) of
-                                  {ok, _} -> true;
-                                  _ -> false
-                              end
-                      end, code:get_path()) of
+    case lists:zf(fun(Ebin) ->
+			  Priv = Ebin ++ "/../priv/",
+			  case file:read_file_info(Priv ++ File) of
+			      {ok, _} -> {true, Priv};
+			      _ -> false
+			  end
+		  end, code:get_path()) of
         [Dir|_] ->
             {ok, Dir};
         [] ->
-            io:format("Error: ~s not found in code path\n", [File]),
+            error_logger:format("Error: ~s not found in code path\n", [File]),
             {error, enoent}
     end.
 
