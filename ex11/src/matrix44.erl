@@ -43,7 +43,7 @@
 %%       represents the given point specified by X,Y,Z .
 %%
 %% ---------------------------------------------------------------------
--vc('$Id: matrix44.erl,v 1.1 2003/02/25 20:08:55 vladdu Exp $ ').
+-vc('$Id: matrix44.erl,v 1.2 2003/02/25 20:15:44 vladdu Exp $ ').
 -export([start/0,multiply44/2,multiply14/2,mk_projection_matrix/1,
 	mk_rotate_matrix/2,mk_scale_matrix/3,mk_hcord/3,
 	mk_translate_matrix/3]).

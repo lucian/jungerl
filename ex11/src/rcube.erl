@@ -17,7 +17,7 @@
 %%%           Transformed again to use the Erlang X11 binding.
 %%%
 %%% --------------------------------------------------------------------
--vc('$Id: rcube.erl,v 1.1 2003/02/25 20:08:55 vladdu Exp $ ').
+-vc('$Id: rcube.erl,v 1.2 2003/02/25 20:15:45 vladdu Exp $ ').
 -export([start/1,init/1,kicker/2]).
 
 -import(matrix44,[multiply14/2,mk_rotate_matrix/2,mk_hcord/3,

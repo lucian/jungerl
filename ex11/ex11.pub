@@ -17,12 +17,3 @@ protocol is implemented it is suggested that we await the
 new Erlang bitsyntax. A 'cool' example program comes along
 with the package. <b>NB: ex11 is the new name and replaces
 the old name x11</b>."}.
-
-
-
-
-
-
-
- 
- 

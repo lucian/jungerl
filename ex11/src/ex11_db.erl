@@ -22,7 +22,7 @@
 %%% Contributor(s): ______________________________________.
 %%%
 %%%---------------------------------------------------------------------
--vc('$Id: ex11_db.erl,v 1.1 2003/02/25 20:08:54 vladdu Exp $ ').
+-vc('$Id: ex11_db.erl,v 1.2 2003/02/25 20:15:43 vladdu Exp $ ').
 -export([init/0,get_display/1,set_display/2,put_window/3,put_pixmap/3,
 	 put_gc/3,put_id/4,get_id/2,store_req/4,get_reply/2]).
 
