@@ -4,13 +4,15 @@
 %%% Created : 10 Dec 2003 by Torbjorn Tornkvist <tobbe@bluetail.com>
 %%% Purpose : Implementation of the NetBIOS/SMB protocol.
 %%%
-%%% $Id: esmb.erl,v 1.10 2004/03/26 00:17:17 etnt Exp $
+%%% $Id: esmb.erl,v 1.11 2004/03/26 11:59:06 etnt Exp $
 %%% --------------------------------------------------------------------
 -export([called_name/1, calling_name/1, ucase/1, lcase/1, check_dir/3,
 	 connect/2, connect/3, connect/4, close/1, user_logon/3, emsg/3,
 	 tree_connect/4, tree_connect/5, list_dir/3, called/1,
 	 open_file_ro/3, open_file_rw/3, stream_read_file/3,
-	 read_file/3, client/2, client/3, mkdir/3, rmdir/3, 
+	 read_file/3, mkdir/3, rmdir/3, 
+	 astart/0, istart/0, ustart/0,
+	 client/2, aclient/2, iclient/2, uclient/2,
 	 close_file/2, write_file/4, delete_file/3, caller/0,
 	 exit_if_error/2, list_shares/3, list_shares/4, l/3]).
 -export([dec_smb/1, tt_name/1]).
@@ -21,6 +23,29 @@
 
 -define(PORT, 139).
 
+
+%%%---------------------------------------------------------------------
+%%% Interface to esmb_client:start/N
+%%% Example, run it as:
+%%%
+%%%  erl -pa ./ebin -noshell -s esmb astart   % ASCII capable
+%%%  erl -pa ./ebin -noshell -s esmb istart   % ISO-8859-1 capable
+%%%
+%%% or in a utf-8 Xterm (xterm -en utf8):
+%%%
+%%%  erl -pa ./ebin -noshell -s esmb ustart   % UTF-8 capable
+%%% 
+%%%---------------------------------------------------------------------
+astart() -> aclient("//korp/tobbe", "tobbe"). % for testing !!
+istart() -> iclient("//korp/tobbe", "tobbe"). % for testing !!
+ustart() -> uclient("//korp/tobbe", "tobbe"). % for testing !!
+
+client(Path, User)  -> iclient(Path, User).
+
+aclient(Path, User) -> esmb_client:astart(Path, User).
+iclient(Path, User) -> esmb_client:istart(Path, User).
+uclient(Path, User) -> esmb_client:ustart(Path, User).
+	    
 
 %%%---------------------------------------------------------------------
 %%% Holy cow ! It turns out ugly already from the beginning.
@@ -205,10 +230,6 @@ connect(Caller, Called, SockOpts, Port) ->
 close(S) ->
     gen_tcp:close(S).
 
-client(Path, User)         -> esmb_client:start(Path, User).
-client(Path, User, Wgroup) -> esmb_client:start(Path, User, Wgroup).
-
-	    
 
 -define(LT_BUFSIZE(Neg, Bin), 
 	(Neg#smb_negotiate_res.max_buffer_size >= size(Bin))).
