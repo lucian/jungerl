@@ -4,7 +4,7 @@
 %%% Created : 30 Jan 2004 by Torbjorn Tornkvist <tobbe@bluetail.com>
 %%% Purpose : Somewhat similar to Sambas 'smbclient' program
 %%%
-%%% $Id: esmb_client.erl,v 1.12 2005/01/07 14:08:01 etnt Exp $
+%%% $Id: esmb_client.erl,v 1.13 2005/01/13 13:26:08 etnt Exp $
 %%% --------------------------------------------------------------------
 -export([start/2, start/4, astart/2, istart/2, ustart/2]).
 -export([swap/3, to_ucs2/3, ucs2_to_charset/2]).
@@ -181,7 +181,7 @@ ls(S, Neg, {Pdu0, Cwd} = State) ->
     Udir = to_ucs2(Neg, add_wildcard(Neg, Cset, WinPath), Cset),
     Pdu = esmb:list_dir(S, Pdu0, Udir),
     print_file_info(Neg, Pdu#smbpdu.finfo),
-    {Pdu, Cwd}
+    {Pdu, Cwd}.
 
 print_file_info(Neg, L) ->
     F = fun(X) ->
