@@ -1,7 +1,7 @@
 /* Created     : 23 Mar 2004 by Tobbe <tobbe@bluetail.com>
  * Description : iconv driver - conversion between character sets
  * 
- * $Id: iconv_drv.c,v 1.2 2004/03/24 00:16:48 etnt Exp $
+ * $Id: iconv_drv.c,v 1.3 2004/03/24 13:26:30 etnt Exp $
  */
 #include <stdio.h>
 #include <string.h>
@@ -198,6 +198,9 @@ static void iv_conv(t_iconvdrv *iv, iconv_t cd, char *ip, int ileft)
     ErlDrvBinary *bin;
 
     op = &outbuf[0];
+
+    /* Reset cd to initial state */
+    iconv(cd, NULL, NULL, NULL, NULL);
 
     if (iconv(cd, &ip, &ileft, &op, &oleft) == (size_t) -1) {
 	fprintf(stderr, "iconv failed \n");
