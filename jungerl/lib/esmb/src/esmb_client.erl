@@ -4,7 +4,7 @@
 %%% Created : 30 Jan 2004 by Torbjorn Tornkvist <tobbe@bluetail.com>
 %%% Purpose : Somewhat similar to Sambas 'smbclient' program
 %%%
-%%% $Id: esmb_client.erl,v 1.1 2004/03/03 00:12:53 etnt Exp $
+%%% $Id: esmb_client.erl,v 1.2 2004/03/04 22:15:56 etnt Exp $
 %%% --------------------------------------------------------------------
 -export([start/2, start/3]).
 -export([swap/3]).
@@ -146,12 +146,29 @@ ls(S, _Neg, {Pdu, Cwd} = State) ->
 
 print_file_info(L) ->
     F = fun(X) ->
-		io:format("~-20s SIZE ~-15w IS ~p~n", 
+		io:format("~-20s ~-20s SIZE ~-15w IS ~p~n", 
 			  [binary_to_list(X#file_info.name),
+			   dt(X#file_info.date_time),
 			   X#file_info.size,
 			   check_attr(X#file_info.attr)])
 	end,
     lists:foreach(F, L).
+
+dt(X) ->
+    {Y,M,D} = X#dt.last_access_date,
+    {H,I,S} = X#dt.last_access_time,
+    i2l(Y) ++ "-" ++ two(M) ++ "-" ++ two(D) ++ " " ++
+	two(H) ++ ":" ++ two(I) ++ ":" ++ two(S).
+
+two(I) ->
+    case i2l(I) of
+	[X] -> [$0,X];
+	X   -> X
+    end.
+
+i2l(I) when integer(I) -> integer_to_list(I);
+i2l(L) when list(L)    -> L.
+
 
 check_attr(A) ->
     check_attr(A, [dir,hidden]).
