@@ -4,7 +4,7 @@
 %%% Created : 10 Dec 2003 by Torbjorn Tornkvist <tobbe@bluetail.com>
 %%% Purpose : Implementation of the NetBIOS/SMB protocol.
 %%%
-%%% $Id: esmb.erl,v 1.12 2004/03/30 21:06:56 etnt Exp $
+%%% $Id: esmb.erl,v 1.13 2004/04/16 13:02:40 etnt Exp $
 %%% --------------------------------------------------------------------
 -export([called_name/1, calling_name/1, ucase/1, lcase/1, check_dir/3,
 	 connect/2, connect/3, connect/4, close/1, user_logon/3, emsg/3,
@@ -528,6 +528,7 @@ dec_read_andx(Req, Pdu) ->
 
 dec_nt_create_andx(Req, Pdu) -> 
     Res = dec_smb(Req, Pdu),
+    exit_if_error(Res, "dec_nt_create_andx"),
     <<?NoAndxCmd,              
     0,                         % reserved
     _:2/binary,                % offset to next command WC
@@ -894,8 +895,8 @@ smb_open_dir_pdu(InReq, Path) ->
 
 
 smb_nt_create_andx_pdu(InReq, Path, Opts) ->
-    {Wc,Wp} = wp_nt_create_andx(length(Path), Opts),
-    Bf = bf_nt_create_andx(Path),
+    {Wc,Wp} = wp_nt_create_andx(sizeof(Path), Opts),
+    Bf = bf_nt_create_andx(InReq, Path),
     Rec = #smbpdu{cmd = ?SMB_NT_CREATE_ANDX,
 		  pid = InReq#smbpdu.pid,
 		  uid = InReq#smbpdu.uid,
@@ -935,8 +936,9 @@ wp_nt_create_andx(NameLen, Opts) ->
       0>>}.                      % Security tracking mode flag (?)
 
 
-bf_nt_create_andx(Name) ->
-    list_to_binary([Name, [0]]).% filename
+bf_nt_create_andx(InReq, Name) ->
+    list_to_binary([0,                   % pad ?
+		    Name, null(InReq)]). % filename
 
 
 oplock(_) -> ?NO_OPLOCK.
