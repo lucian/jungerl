@@ -5,7 +5,7 @@
 %%%           and 2255. The interface is based on RFC 1823, and
 %%%           draft-ietf-asid-ldap-c-api-00.txt
 %%% --------------------------------------------------------------------
--vc('$Id: eldap.erl,v 1.3 2003/11/10 13:59:03 etnt Exp $ ').
+-vc('$Id: eldap.erl,v 1.4 2005/02/28 23:29:22 etnt Exp $ ').
 -export([open/1,open/2,simple_bind/3,controlling_process/2,
 	 baseObject/0,singleLevel/0,wholeSubtree/0,close/1,
 	 equalityMatch/2,greaterOrEqual/2,lessOrEqual/2,
@@ -39,6 +39,8 @@
 %%% For debug purposes
 %%-define(PRINT(S, A), io:fwrite("~w(~w): " ++ S, [?MODULE,?LINE|A])).
 -define(PRINT(S, A), true).
+
+-define(elog(S, A), error_logger:info_msg("~w(~w): "++S,[?MODULE,?LINE|A])).
 
 %%% ====================================================================
 %%% Exported interface
@@ -676,9 +678,9 @@ do_recv(S, Data, Len, Timeout) when Data#eldap.use_tls == true ->
 recv_response(S, Data) ->
     Timeout = get(req_timeout), % kludge...
     case do_recv(S, Data, 0, Timeout) of
-	{ok, Data} ->
-	    check_tag(Data),
-	    case asn1rt:decode('ELDAPv3', 'LDAPMessage', Data) of
+	{ok, Packet} ->
+	    check_tag(Packet),
+	    case asn1rt:decode('ELDAPv3', 'LDAPMessage', Packet) of
 		{ok,Resp} -> {ok,Resp};
 		Error     -> throw(Error)
 	    end;
