@@ -20,7 +20,7 @@
 %%
 %% Author contact: richardc@csd.uu.se
 %%
-%% $Id: erl_syntax_lib.erl,v 1.1 2003/02/25 11:38:44 cpressey Exp $
+%% $Id: erl_syntax_lib.erl,v 1.2 2003/10/23 02:08:39 cpressey Exp $
 %%
 %% =====================================================================
 %%
@@ -1361,6 +1361,13 @@ analyze_import_attribute(Node) ->
                         _ ->
                             throw(syntax_error)
                     end;
+		[M] ->
+                    case erl_syntax:type(M) of
+                        atom ->
+                            {erl_syntax:atom_value(M), []};
+                        _ ->
+                            throw(syntax_error)
+                    end;		    
                 _ ->
                     throw(syntax_error)
             end;

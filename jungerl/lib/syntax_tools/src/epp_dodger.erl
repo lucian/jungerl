@@ -20,7 +20,7 @@
 %%
 %% Author contact: richardc@csd.uu.se
 %%
-%% $Id: epp_dodger.erl,v 1.1 2003/02/25 11:38:44 cpressey Exp $
+%% $Id: epp_dodger.erl,v 1.2 2003/10/23 02:08:39 cpressey Exp $
 %%
 %% =====================================================================
 %%
@@ -130,7 +130,8 @@ parse_form(Dev, L0) ->
     case io:scan_erl_form(Dev, "", L0) of
         {ok, Ts, L1} ->
             case catch rewrite_form(parse_tokens(scan_form(Ts))) of
-                {'EXIT', _} ->
+                {'EXIT', Why} ->
+		    io:fwrite("rewrite_form exited: ~p~n", [Why]),
                     {error, {L1, ?MODULE, unknown}, L1};
                 {error, R} ->
                     {error, R, L1};
