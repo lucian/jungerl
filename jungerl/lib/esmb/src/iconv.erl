@@ -5,7 +5,7 @@
 %%% Purpose : iconv support
 %%% Created : 23 Mar 2004 by <tobbe@bluetail.com>
 %%%
-%%% $Id: iconv.erl,v 1.1 2004/03/24 00:16:48 etnt Exp $
+%%% $Id: iconv.erl,v 1.2 2004/03/26 00:17:17 etnt Exp $
 %%%----------------------------------------------------------------------
 -behaviour(gen_server).
 -export([start/0, start_link/0, open/2, conv/2, close/1]).
@@ -101,8 +101,6 @@ recv(Port) ->
 	{Port, value, Bin} ->
 	    {ok,Bin};
 	{Port, error, ErrAtom} ->
-	    unlink(Port),
-	    erlang:port_close(Port),
 	    {error, ErrAtom}
     end.
 
