@@ -4,7 +4,7 @@
 %%% Created : 10 Dec 2003 by Torbjorn Tornkvist <tobbe@bluetail.com>
 %%% Purpose : Implementation of the NetBIOS/SMB protocol.
 %%%
-%%% $Id: esmb.erl,v 1.3 2004/03/12 15:15:03 etnt Exp $
+%%% $Id: esmb.erl,v 1.4 2004/03/12 16:13:11 etnt Exp $
 %%% --------------------------------------------------------------------
 -export([called_name/1, calling_name/1, ucase/1, lcase/1, check_dir/3,
 	 connect/2, connect/3, connect/4, close/1, user_logon/3, emsg/3,
@@ -895,7 +895,8 @@ test_response() ->
     
 
 challenge_response(Passwd, Challenge) -> 
-    ex(s21_lm_session_key(Passwd), Challenge).
+    %%ex(s21_lm_session_key(Passwd), Challenge).
+    ex(s21_nt_session_key(Passwd), Challenge).
 
 ex(<<K0:7/binary,K1:7/binary>>, Data) when size(Data) == 8 ->
     concat_binary([e(K0, Data),
@@ -918,6 +919,12 @@ s21_lm_session_key(Passwd) ->
     S16X  = s16x(Passwd),
     Zero5 = zeros(5),
     <<S16X/binary, Zero5/binary>>.
+
+s21_nt_session_key(Passwd) -> 
+    md4:start_link(),
+    {ok, S16}  = md4:digest(Passwd),
+    Zero5 = zeros(5),
+    <<S16/binary, Zero5/binary>>.
 
 %%%
 %%% See libsmb/smbdes.c str_to_key(Str,Key)
