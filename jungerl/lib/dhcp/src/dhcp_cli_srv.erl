@@ -10,7 +10,7 @@
 %%%
 %%%           To keep it independent of the surrounding system (so
 %%%           that it can be plugged in and reused somewhere else),
-%%%           it provide some hooks. First it need a directory at
+%%%           it provides some hooks. First it need a directory at
 %%%           startup where it can store the Dets file that holds
 %%%           the lease information. Then, when allocating an IP
 %%%           address, two callbacks exist. One for implementing a
@@ -18,7 +18,7 @@
 %%%           system that an allocated IP address can't be renewed
 %%%           and thus has to be released.
 %%%
-%%% $Id: dhcp_cli_srv.erl,v 1.1 2005/08/31 14:10:05 etnt Exp $
+%%% $Id: dhcp_cli_srv.erl,v 1.2 2005/08/31 17:15:46 etnt Exp $
 %%%-------------------------------------------------------------------
 -behaviour(gen_server).
 %%--------------------------------------------------------------------
@@ -670,8 +670,7 @@ do_alloc(_State, X0, D0) ->
 					  add_vendor_class(X)++Opts]}),
 	    ?DHCP_TRACEFUN(X,"sending DHCPDISCOVER to server: ~s , giaddr: ~s",
 		   [dhcp_lib:ip2str(SrvIp), dhcp_lib:ip2str(OurIp)]),
-	    XXX = udp_send(X, Pdu, SrvIp),
-	    ?elog("++++++++ ~p~n", [XXX]),
+	    udp_send(X, Pdu, SrvIp),
 	    
 	    %% Set a timer here so that we won't end up hanging 
 	    %% in the SELECTING state.
