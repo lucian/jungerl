@@ -18,7 +18,7 @@
 %%%           system that an allocated IP address can't be renewed
 %%%           and thus has to be released.
 %%%
-%%% $Id: dhcp_cli_srv.erl,v 1.2 2005/08/31 17:15:46 etnt Exp $
+%%% $Id: dhcp_cli_srv.erl,v 1.3 2005/09/01 10:57:33 etnt Exp $
 %%%-------------------------------------------------------------------
 -behaviour(gen_server).
 %%--------------------------------------------------------------------
@@ -686,7 +686,8 @@ do_alloc(_State, X0, D0) ->
 	    dets:insert(?DB, X1);
 
 	{error, Emsg} ->
-	    ?DHCP_TRACEFUN(X0,"failed to send DHCPDISCOVER, reason: ~s", [Emsg])
+	    ?DHCP_TRACEFUN(X0,"failed to send DHCPDISCOVER, reason: ~s",[Emsg]),
+	    gen_server:reply(X0#lease.from, {error, Emsg})
     end.
 
 get_fd(X) ->
