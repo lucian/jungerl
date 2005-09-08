@@ -4,7 +4,7 @@
 %%% Desc.   : Encode/Decode routines for DHCP.
 %%%           See also: RFC 2132,1533
 %%%
-%%% $Id: dhcp_lib.erl,v 1.2 2005/09/02 13:40:19 etnt Exp $
+%%% $Id: dhcp_lib.erl,v 1.3 2005/09/08 10:40:45 etnt Exp $
 %%%-------------------------------------------------------------------
 -export([enc/1, dec/1, get_opt/2, ip2str/1]).
 
@@ -179,8 +179,8 @@ enc_opt({?DHCP_OP_VENDOR_CLASS, X}) ->
     [?DHCP_OP_VENDOR_CLASS, Len, l2b(X)];
 %%%
 enc_opt({?DHCP_OP_CLIENT_ID, X}) -> 
-    B = i2b(X),
-    [?DHCP_OP_CLIENT_ID, 5, <<0, B/binary>>];
+    B = to_binary(X),
+    [?DHCP_OP_CLIENT_ID, size(B), B];
 %%%
 enc_opt({?DHCP_OP_REQUESTED_IP, X}) -> 
     [?DHCP_OP_REQUESTED_IP, 4, ip2bin(X)];
@@ -238,6 +238,11 @@ bin2ips(<<A,B,C,D,T/binary>>) ->
 bin2ips(<<>>) ->
     [].
 
+
+to_binary(B) when binary(B)  -> B;
+to_binary(I) when integer(I) -> list_to_binary(integer_to_list(I));
+to_binary(L) when list(L)    -> list_to_binary(L);
+to_binary(A) when atom(A)    -> list_to_binary(atom_to_list(A)).
 
 l2b(L) when list(L)   -> list_to_binary(L);
 l2b(B) when binary(B) -> B.
