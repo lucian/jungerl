@@ -15,7 +15,7 @@
 
 %%% Created : 29 Jan 1998 by  <tony@RIOJA>
 
-%%% $Id: ftpd.erl,v 1.3 2005/09/16 23:51:34 etnt Exp $
+%%% $Id: ftpd.erl,v 1.4 2005/09/17 07:29:22 etnt Exp $
 
 %%% Updates by David N. Welton <davidw@eidetix.com> May 2004.
 %%% Updates by Martin Bjorklund <mbj@bluetail.com>  Dec 2004.
@@ -64,7 +64,7 @@
 
 -import(lists, [reverse/1, map/2, append/1, foreach/2, foldl/3]).
 
--include("ftpd.hrl").
+-include("../include/ftpd.hrl").
 -include_lib("kernel/include/file.hrl").
 
 -define(is_ip(X), size(X)==4, 

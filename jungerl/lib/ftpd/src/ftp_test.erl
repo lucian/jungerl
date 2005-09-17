@@ -2,11 +2,11 @@
 %%% Created : 16 Sep 2005 by Torbjorn Tornkvist <tobbe@tornkvist.org>
 %%% Desc.   : Setup some test examples.
 %%%
-%%% $Id: ftp_test.erl,v 1.1 2005/09/16 23:51:34 etnt Exp $
+%%% $Id: ftp_test.erl,v 1.2 2005/09/17 07:29:22 etnt Exp $
 %%%-------------------------------------------------------------------
 -module(ftp_test).
 
--include("ftpd.hrl").
+-include("../include/ftpd.hrl").
 
 -export([start/0]).
 
