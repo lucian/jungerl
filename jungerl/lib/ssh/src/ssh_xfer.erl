@@ -5,6 +5,10 @@
 
 -module(ssh_xfer).
 
+-vsn("$Revision: 1.4 $ ").
+
+-rcsid("$Id: ssh_xfer.erl,v 1.4 2005/09/18 09:00:31 tonyrog Exp $\n").
+
 -compile(export_all).
 
 -include("../include/ssh.hrl").

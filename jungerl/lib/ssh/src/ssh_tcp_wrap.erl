@@ -5,6 +5,10 @@
 
 -module(ssh_tcp_wrap).
 
+-vsn("$Revision: 1.2 $ ").
+
+-rcsid("$Id: ssh_tcp_wrap.erl,v 1.2 2005/09/18 09:00:31 tonyrog Exp $\n").
+
 -export([spawn_server/3, server/3]).
 -export([server_init/4, server_loop/3, accept_loop/4]). %% helper
 

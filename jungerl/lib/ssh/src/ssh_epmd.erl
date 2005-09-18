@@ -5,6 +5,10 @@
 
 -module(ssh_epmd).
 
+-vsn("$Revision: 1.3 $ ").
+
+-rcsid("$Id: ssh_epmd.erl,v 1.3 2005/09/18 09:00:30 tonyrog Exp $\n").
+
 -behaviour(gen_server).
 
 %% External exports

@@ -5,6 +5,10 @@
 
 -module(ssh_bits).
 
+-vsn("$Revision: 1.2 $ ").
+
+-rcsid("$Id: ssh_bits.erl,v 1.2 2005/09/18 09:00:30 tonyrog Exp $\n").
+
 -include("../include/ssh.hrl").
 
 -export([encode/1, encode/2]).
@@ -12,6 +16,7 @@
 -export([mpint/1,  bignum/1, string/1, name_list/1]).
 -export([b64_encode/1, b64_decode/1]).
 -export([install_messages/1, uninstall_messages/1]).
+-export([key_blob/1, fingerprint/1]).
 
 %% integer utils
 -export([isize/1]).
@@ -100,6 +105,16 @@ uninstall_messages(Codes) ->
 		    erase({msg_name,Code}),
 		    erase({msg_code,Name})
 	    end, Codes).
+
+fingerprint(Key) ->
+    Bin = key_blob(Key),
+    erlang:md5(Bin).
+
+key_blob(#ssh_key { type=rsa, public = {N,E}}) ->
+    encode(["ssh-rsa",E,N],[string,mpint,mpint]);
+key_blob(#ssh_key { type=dsa, public = {P,Q,G,Y}}) ->
+    encode(["ssh-dss",P,Q,G,Y],
+	   [string,mpint,mpint,mpint,mpint]).
 
 %%
 %% Encode a record, the type spec is expected to be 

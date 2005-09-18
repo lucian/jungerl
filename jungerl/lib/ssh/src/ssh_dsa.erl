@@ -5,6 +5,10 @@
 
 -module(ssh_dsa).
 
+-vsn("$Revision: 1.2 $ ").
+
+-rcsid("$Id: ssh_dsa.erl,v 1.2 2005/09/18 09:00:30 tonyrog Exp $\n").
+
 -compile(export_all).
 
 
