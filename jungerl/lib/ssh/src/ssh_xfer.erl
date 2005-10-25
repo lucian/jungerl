@@ -5,9 +5,9 @@
 
 -module(ssh_xfer).
 
--vsn("$Revision: 1.5 $ ").
+-vsn("$Revision: 1.6 $ ").
 
--rcsid("$Id: ssh_xfer.erl,v 1.5 2005/09/22 20:48:34 tonyrog Exp $\n").
+-rcsid("$Id: ssh_xfer.erl,v 1.6 2005/10/25 22:57:44 tonyrog Exp $\n").
 
 -compile(export_all).
 

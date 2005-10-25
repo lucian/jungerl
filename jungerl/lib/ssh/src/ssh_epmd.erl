@@ -5,9 +5,9 @@
 
 -module(ssh_epmd).
 
--vsn("$Revision: 1.3 $ ").
+-vsn("$Revision: 1.4 $ ").
 
--rcsid("$Id: ssh_epmd.erl,v 1.3 2005/09/18 09:00:30 tonyrog Exp $\n").
+-rcsid("$Id: ssh_epmd.erl,v 1.4 2005/10/25 22:57:44 tonyrog Exp $\n").
 
 -behaviour(gen_server).
 

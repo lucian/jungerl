@@ -5,9 +5,9 @@
 
 -module(ssh_dist).
 
--vsn("$Revision: 1.3 $ ").
+-vsn("$Revision: 1.4 $ ").
 
--rcsid("$Id: ssh_dist.erl,v 1.3 2005/09/18 09:00:30 tonyrog Exp $\n").
+-rcsid("$Id: ssh_dist.erl,v 1.4 2005/10/25 22:57:44 tonyrog Exp $\n").
 
 %% Handles the connection setup phase with other Erlang nodes.
 

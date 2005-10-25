@@ -5,9 +5,9 @@
 
 -module(ssh_io).
 
--vsn("$Revision: 1.2 $ ").
+-vsn("$Revision: 1.3 $ ").
 
--rcsid("$Id: ssh_io.erl,v 1.2 2005/09/18 09:00:30 tonyrog Exp $\n").
+-rcsid("$Id: ssh_io.erl,v 1.3 2005/10/25 22:57:44 tonyrog Exp $\n").
 
 -export([read_password/1, read_line/1]).
 -export([verify_host/1]).

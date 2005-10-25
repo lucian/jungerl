@@ -5,9 +5,9 @@
 
 -module(loop_tcp).
 
--vsn("$Revision: 1.2 $ ").
+-vsn("$Revision: 1.3 $ ").
 
--rcsid("$Id: loop_tcp.erl,v 1.2 2005/09/18 09:00:30 tonyrog Exp $\n").
+-rcsid("$Id: loop_tcp.erl,v 1.3 2005/10/25 22:57:44 tonyrog Exp $\n").
 
 
 %% Socket server for TCP/IP
