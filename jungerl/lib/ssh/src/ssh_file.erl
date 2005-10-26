@@ -5,9 +5,9 @@
 
 -module(ssh_file).
 
--vsn("$Revision: 1.3 $ ").
+-vsn("$Revision: 1.4 $ ").
 
--rcsid("$Id: ssh_file.erl,v 1.3 2005/10/25 22:57:44 tonyrog Exp $\n").
+-rcsid("$Id: ssh_file.erl,v 1.4 2005/10/26 13:10:01 klacke Exp $\n").
 
 -include("../include/ssh.hrl").
 -include("PKCS-1.hrl").
@@ -90,8 +90,10 @@ lookup_authorized_key_fd(Fd, Key) ->
 	    end
     end.
 
-authorized_user(Type, User, _Service, Password) ->
+authorized_user(Type, User, Service, Password) ->
     File = filename:join(ssh_dir(Type), "authorized_users"),
+    io:format("authorized_user: file=~p user=~p service=~p pwd=~p~n", 
+	      [File, User, Service, Password]),
     lookup_authorized_user(File, User, Password).
 
 lookup_authorized_user(File, User, Password) ->
@@ -109,7 +111,7 @@ lookup_authorized_user_fd(Fd, User, Password) ->
 	eof ->
 	    {error, not_found};
 	Line ->
-	    case string:tokens(Line, ":") of
+	    case string:tokens(Line, ":\n") of
 		[User, Password] ->
 		    ok;
 		[User, "{SHA}"++SHAPassword] ->
