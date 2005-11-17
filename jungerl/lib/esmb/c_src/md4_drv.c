@@ -1,7 +1,7 @@
 /* Created     : 12 Mar 2004 by Tobbe <tobbe@bluetail.com>
  * Description : MD4 driver - API in md4.erl 
  * 
- * $Id: md4_drv.c,v 1.2 2004/03/23 22:32:40 etnt Exp $
+ * $Id: md4_drv.c,v 1.3 2005/11/17 13:25:13 etnt Exp $
  */
 #include <stdio.h>
 #include <string.h>
@@ -144,7 +144,7 @@ static void md4drv_from_erlang(ErlDrvData drv_data, char *buf, int len)
     MD4Update(&context, buf, len);
     MD4Final(digest, &context);
 
-    if (!(bin = driver_alloc_binary(len))) {
+    if (!(bin = driver_alloc_binary(16))) {
 	driver_send_error(md4, &am_enomem);
     }
     else {
