@@ -8,7 +8,7 @@
 %%%
 %%% @end
 %%%
-%%% $Id: yfront.erl,v 1.1 2005/11/15 22:23:20 etnt Exp $
+%%% $Id: yfront.erl,v 1.2 2005/11/20 18:42:38 etnt Exp $
 %%%-------------------------------------------------------------------
 -module(yfront).
 
@@ -24,7 +24,7 @@
 auth_redirect() ->
     auth_redirect("").
 
-%%% @doc Works as {@link auth_redirect/0, specify realm.
+%%% @doc Works as {@link auth_redirect/0}, specify realm.
 auth_redirect(Realm) ->
     auth_redirect0("realm=\""++Realm++"\"").
 
