@@ -4,7 +4,7 @@
 %%% Purpose : Supervisor for the esmb stuff.
 %%% Created : 6 Apr 20034
 %%%
-%%% $Id: esmb_sup.erl,v 1.1 2004/05/13 11:32:39 etnt Exp $
+%%% $Id: esmb_sup.erl,v 1.2 2005/11/24 13:59:10 etnt Exp $
 %%%----------------------------------------------------------------------
 -module(esmb_sup).
 

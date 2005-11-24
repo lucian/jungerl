@@ -4,7 +4,7 @@
 %%% Created : 30 Jan 2004 by Torbjorn Tornkvist <tobbe@bluetail.com>
 %%% Purpose : Somewhat similar to Sambas 'smbclient' program
 %%%
-%%% $Id: esmb_client.erl,v 1.14 2005/04/27 10:43:00 etnt Exp $
+%%% $Id: esmb_client.erl,v 1.15 2005/11/24 13:59:10 etnt Exp $
 %%% --------------------------------------------------------------------
 -export([start/1, start/2, astart/1, istart/1, ustart/1]).
 -export([swap/3, to_ucs2/3, ucs2_to_charset/2, user/3, dbg_ls/6]).
@@ -227,7 +227,7 @@ ls(S, Neg, {Pdu0, Cwd} = State) ->
     Cset = get(charset),
     WinPath = mk_winpath(Neg, Cwd, Cset),
     Udir = to_ucs2(Neg, add_wildcard(Neg, Cset, WinPath), Cset),
-    Pdu = esmb:list_dir(S, Pdu0, Udir),
+    Pdu = (catch esmb:list_dir(S, Pdu0, Udir)),
     print_file_info(Neg, Pdu#smbpdu.finfo),
     {Pdu, Cwd}.
 
@@ -239,7 +239,8 @@ print_file_info(Neg, L) ->
 			   X#file_info.size,
 			   check_attr(X#file_info.attr)])
 	end,
-    lists:foreach(F, L).
+    lists:foreach(F, L),
+    io:format("Number of entries are ~w~n", [string:len(L)]).
 
 dt(X) ->
     {Y,M,D} = X#dt.last_access_date,

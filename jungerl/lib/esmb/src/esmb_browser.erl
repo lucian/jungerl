@@ -3,7 +3,7 @@
 %%% Created : 18 Apr 2005 by Torbjorn Tornkvist <tobbe@tornkvist.org>
 %%% Desc.   : Browser server for Windows Networks.
 %%%
-%%% $Id: esmb_browser.erl,v 1.2 2005/07/12 11:54:17 etnt Exp $
+%%% $Id: esmb_browser.erl,v 1.3 2005/11/24 13:59:10 etnt Exp $
 %%%-------------------------------------------------------------------
 -module(esmb_browser).
 

@@ -4,7 +4,7 @@
 %%% Purpose : esmb handling
 %%% Created : 6 Apr 2004
 %%%
-%%% $Id: esmb_app.erl,v 1.1 2004/05/13 11:32:39 etnt Exp $
+%%% $Id: esmb_app.erl,v 1.2 2005/11/24 13:59:10 etnt Exp $
 %%%----------------------------------------------------------------------
 -module(esmb_app).
 

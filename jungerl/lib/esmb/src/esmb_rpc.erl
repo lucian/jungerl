@@ -11,7 +11,7 @@
 %%% @reference "DCE/RPC over SMB", Luke Leighton, ISBN-1-57870-150-3 .
 %%% @end
 %%%
-%%% $Id: esmb_rpc.erl,v 1.4 2005/07/12 11:54:18 etnt Exp $
+%%% $Id: esmb_rpc.erl,v 1.5 2005/11/24 13:59:10 etnt Exp $
 %%% --------------------------------------------------------------------
 -module(esmb_rpc).
 -export([rpc_samr_connect/3, rpc_samr_close/3, rpc_samr_enum_doms/3,

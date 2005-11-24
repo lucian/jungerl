@@ -5,7 +5,7 @@
 %%% Purpose : iconv support
 %%% Created : 23 Mar 2004 by <tobbe@bluetail.com>
 %%%
-%%% $Id: iconv.erl,v 1.4 2005/04/27 10:43:00 etnt Exp $
+%%% $Id: iconv.erl,v 1.5 2005/11/24 13:59:10 etnt Exp $
 %%%----------------------------------------------------------------------
 -behaviour(gen_server).
 -export([start/0, start_link/0, open/2, conv/2, close/1]).
