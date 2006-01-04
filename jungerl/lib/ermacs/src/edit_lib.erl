@@ -4,7 +4,7 @@
 %% Created : 15 Jun 1998 by tobbe@serc.rmit.edu.au
 %% Function: Core library routines for the Edit editor.
 %%----------------------------------------------------------------------
--vc('$Id: edit_lib.erl,v 1.1 2003/02/21 19:01:19 lukeg Exp $ ').
+-vc('$Id: edit_lib.erl,v 1.2 2006/01/04 09:33:20 etnt Exp $ ').
 
 -include_lib("ermacs/include/edit.hrl").
 
@@ -587,6 +587,11 @@ delete_window(State) ->
 quit(State) ->
     ?EDIT_TERMINAL:teardown(),
     halt().
+
+-command({stop, [], "Exit the editor process, without halting Erlang."}).
+stop(State) ->
+    ?EDIT_TERMINAL:teardown(),
+    init:restart().  % FIXME , should do something nicer... (tobbe)
 
 -command({printf, [{string, "String:"}],
 	  "Print a string to standard output (the file edit.out)"}).
