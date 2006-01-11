@@ -1,5 +1,5 @@
 #
-# $Id: Makefile,v 1.1 2006/01/11 14:33:27 asergey Exp $
+# $Id: Makefile,v 1.2 2006/01/11 15:31:06 asergey Exp $
 #
 
 include ../vsn.mk

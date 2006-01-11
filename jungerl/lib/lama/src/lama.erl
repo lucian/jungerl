@@ -1,5 +1,5 @@
 %%%------------------------------------------------------------------------
-%%% File: $Id: lama.erl,v 1.1 2006/01/11 14:33:27 asergey Exp $
+%%% File: $Id: lama.erl,v 1.2 2006/01/11 15:31:06 asergey Exp $
 %%%------------------------------------------------------------------------
 %%% @doc This module implements LAMA - Log and Alarm Management Applicaiton.
 %%% This module provides interface functions for .<p/>
@@ -30,7 +30,7 @@
 %%%------------------------------------------------------------------------
 -module(lama).
 -author('serge@corp.idt.net').
--id("$Id: lama.erl,v 1.1 2006/01/11 14:33:27 asergey Exp $").
+-id("$Id: lama.erl,v 1.2 2006/01/11 15:31:06 asergey Exp $").
 
 -behaviour(application).
 
