@@ -1,7 +1,24 @@
 # Makefile for the LAMA application maintained in Jungerl
 #
-# $Id: Makefile,v 1.1 2006/01/11 15:31:06 asergey Exp $
+# $Id: Makefile,v 1.2 2006/01/12 19:23:33 asergey Exp $
 # $Url$
 #
 
-include ../../support/subdir.mk
+#include ../../support/subdir.mk
+APP_NAME=lama
+
+all:
+	(cd src;$(MAKE))
+
+clean:
+	(cd src;$(MAKE) clean)
+
+release: clean appfile
+	sh ../../support/create_release.sh
+
+appfile:
+	(cd src;$(MAKE) ../ebin/$(APP_NAME).app)
+
+docs:
+	erl -noshell -run edoc_run application "'$(APP_NAME)'" \
+       '"."' '[{def,{vsn,"$(VSN)"}}]' -s init stop

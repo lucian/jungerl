@@ -1,5 +1,5 @@
 %%%------------------------------------------------------------------------
-%%% File: $Id: lama_alarm_h.erl,v 1.2 2006/01/11 15:31:06 asergey Exp $
+%%% File: $Id: lama_alarm_h.erl,v 1.3 2006/01/12 19:23:33 asergey Exp $
 %%%------------------------------------------------------------------------
 %%% @doc This module implements a replacement for SASL's alarm_handler.
 %%% It offers two features:
@@ -28,7 +28,7 @@
 %%%------------------------------------------------------------------------
 -module(lama_alarm_h).
 -author('serge@corp.idt.net').
--id("$Id: lama_alarm_h.erl,v 1.2 2006/01/11 15:31:06 asergey Exp $").
+-id("$Id: lama_alarm_h.erl,v 1.3 2006/01/12 19:23:33 asergey Exp $").
 
 -behaviour(gen_event).
 

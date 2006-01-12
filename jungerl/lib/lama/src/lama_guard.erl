@@ -1,5 +1,5 @@
 %%%------------------------------------------------------------------------
-%%% File: $Id: lama_guard.erl,v 1.2 2006/01/11 15:31:06 asergey Exp $
+%%% File: $Id: lama_guard.erl,v 1.3 2006/01/12 19:23:33 asergey Exp $
 %%%------------------------------------------------------------------------
 %%% @doc This module implements a guard process for custom event handlers
 %%% @author Serge Aleynikov <serge@hq.idt.net>
@@ -9,7 +9,7 @@
 %%%------------------------------------------------------------------------
 -module(lama_guard).
 -author('serge@corp.idt.net').
--id("$Id: lama_guard.erl,v 1.2 2006/01/11 15:31:06 asergey Exp $").
+-id("$Id: lama_guard.erl,v 1.3 2006/01/12 19:23:33 asergey Exp $").
 
 %%%
 %%% A guard process that facilitates re-addition of alarm and log handlers

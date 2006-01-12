@@ -1,17 +1,17 @@
 %%%------------------------------------------------------------------------
-%%% File: $Id: tracer.erl,v 1.2 2006/01/11 15:31:06 asergey Exp $
+%%% File: $Id: tracer.erl,v 1.3 2006/01/12 19:23:33 asergey Exp $
 %%%------------------------------------------------------------------------
 %%% @author Serge Aleynikov <serge@hq.idt.net>
 %%% @doc This module implements tracing support for function calls.  It is
 %%% similar to dbg:c/3, however it can return the trace as its result.
-%%% @version $Rev: 265 $
-%%% $LastChangedDate: 2005-10-21 14:56:03 -0400 (Fri, 21 Oct 2005) $
+%%% @version $Rev: 359 $
+%%% $LastChangedDate: 2006-01-11 10:28:26 -0500 (Wed, 11 Jan 2006) $
 %%% @end
 %%% $URL: http://devlinuxpro.mis.idt.net/svn/apps/DRiP/current/lib/lama/src/tracer.erl $
 %%%------------------------------------------------------------------------
 -module(tracer).
 -author('serge@corp.idt.net').
--id("$Id: tracer.erl,v 1.2 2006/01/11 15:31:06 asergey Exp $").
+-id("$Id: tracer.erl,v 1.3 2006/01/12 19:23:33 asergey Exp $").
 
 % Debugging facility
 -export([t/3, t/4, tp/3, tp/4, tf/3, tf/4, print_trace/1]).
