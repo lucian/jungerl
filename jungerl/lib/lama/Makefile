@@ -1,6 +1,6 @@
 # Makefile for the LAMA application maintained in Jungerl
 #
-# $Id: Makefile,v 1.2 2006/01/12 19:23:33 asergey Exp $
+# $Id: Makefile,v 1.3 2006/03/10 18:59:34 asergey Exp $
 # $Url$
 #
 
