@@ -5,7 +5,7 @@
 %%%           and 2255. The interface is based on RFC 1823, and
 %%%           draft-ietf-asid-ldap-c-api-00.txt
 %%% --------------------------------------------------------------------
--vc('$Id: eldap.erl,v 1.4 2005/02/28 23:29:22 etnt Exp $ ').
+-vc('$Id: eldap.erl,v 1.5 2006/11/24 09:38:11 etnt Exp $ ').
 -export([open/1,open/2,simple_bind/3,controlling_process/2,
 	 baseObject/0,singleLevel/0,wholeSubtree/0,close/1,
 	 equalityMatch/2,greaterOrEqual/2,lessOrEqual/2,
@@ -366,15 +366,7 @@ do_connect(Host, Data, Opts) when Data#eldap.use_tls == true ->
 	    ssl:seed("bkrlnateqqo" ++ integer_to_list(X));
        true -> true
     end,
-    {ok, Fd} = ssl:connect(Host, Data#eldap.port, [{verify,0}|Opts]),
-    if Vsn >= "5.3" ->
-	    %% In R9C, but not in R9B
-	    {ok, Cert} = ssl:peercert(Fd, [ssl, subject]),
-	    io:fwrite("ssl_connect: peer cert:~n~p~n", [Cert]);
-       true ->
-	    io:fwrite("ssl-connect succeded~n", [])
-    end,
-    {ok, Fd}.
+    ssl:connect(Host, Data#eldap.port, [{verify,0}|Opts]).
 
 
 loop(Cpid, Data) ->
@@ -468,7 +460,7 @@ exec_simple_bind_reply(Data, {ok,Msg}) when
   Msg#'LDAPMessage'.messageID == Data#eldap.id ->
     case Msg#'LDAPMessage'.protocolOp of
 	{bindResponse, Result} ->
-	    case Result#'LDAPResult'.resultCode of
+	    case Result#'BindResponse'.resultCode of
 		success -> {ok,Data};
 		Error   -> {error, Error}
 	    end;
@@ -785,7 +777,20 @@ log(_, _, _, _) ->
 send(To,Msg) -> To ! {self(),Msg}.
 recv(From)   -> receive {From,Msg} -> Msg end.
 
+ldap_closed_p(Data, Emsg) when Data#eldap.use_tls == true ->
+    %% Check if the SSL socket seems to be alive or not
+    case catch ssl:sockname(Data#eldap.fd) of
+	{error, _} ->
+	    ssl:close(Data#eldap.fd),
+	    {error, ldap_closed};
+	{ok, _} ->
+	    {error, Emsg};
+	_ ->
+	    %% sockname crashes if the socket pid is not alive
+	    {error, ldap_closed}
+    end;
 ldap_closed_p(Data, Emsg) ->
+    %% non-SSL socket
     case inet:port(Data#eldap.fd) of
 	{error,_} -> {error, ldap_closed};
 	_         -> {error,Emsg}
