@@ -1,4 +1,4 @@
-## Original jungerl code from SourceForge
+## Original jungerl code from SourceForge: Feb 20th, 2003 -  Feb 13th, 2011
 
 - https://sourceforge.net/projects/jungerl/
 - https://jungerl.sourceforge.net/
